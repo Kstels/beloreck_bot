@@ -1,0 +1,30 @@
+:host {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  height: 100%;
+}
+
+.cubok {
+  width: 200px;
+  height: 200px;
+  background: url('/assets/img/cubok.png');
+  background-size: cover;
+}
+
+.list {
+  width: 50%;
+
+  .row {
+    display: flex;
+    padding: 4px;
+    background: #1f2935;
+    border-radius: 4px;
+    padding: 20px 20px;
+  }
+
+  .row + .row {
+    margin-top: 8px;
+  }
+}
