@@ -4,11 +4,11 @@
 /backend/node_modules
 
 # compiled output frontend
-#/frontend/dist
-#/frontend/dist-server
-#/frontend/tmp
-#/frontend/out-tsc
-/frontend/node_modules
+/frontend_2/dist
+/frontend_2/dist-server
+/frontend_2/tmp
+/frontend_2/out-tsc
+/frontend_2/node_modules
 
 # Logs
 **/logs
