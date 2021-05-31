@@ -17,6 +17,14 @@ export class UsersService {
         );
     }
 
+    getUsers(): Observable<User[]> {
+        return from(
+            this.usersRepository.find(<any>{
+                select: ['id', 'firstName', 'lastName', 'score', 'teamName'],
+            }),
+        );
+    }
+
     findUserByTeam(team: string): Observable<User> {
         return from(
             this.usersRepository.findOne(<any>{

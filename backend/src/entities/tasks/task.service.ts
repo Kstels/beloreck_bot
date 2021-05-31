@@ -5,7 +5,7 @@ import {from, Observable} from 'rxjs';
 import {Task} from './task.entity';
 
 export enum TaskType {
-    STOLB= 'stolb',
+    STOLB = 'stolb',
     OSTANOVKA = 'ostanovka',
     PODIEZD = 'podiezd',
     GARAGE = 'garage',
@@ -39,6 +39,7 @@ export class TaskService {
             this.tasksRepository.findOne(<any>{
                 select: ['id', 'userId', 'type', 'photoBefore', 'photoAfter', 'approved'],
                 where: [{userId}],
+                order: {'id': 'DESC'},
             }),
         );
     }

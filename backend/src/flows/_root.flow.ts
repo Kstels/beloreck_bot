@@ -5,18 +5,29 @@ import {ActiveFlowService} from '../entities/activeFlow/activeFlow.service';
 import {WelcomeFlow} from './welcome.flow';
 import {FlowType} from './flowsMap';
 import {TasksFlow} from './tasks.flow';
+import {CommandsFlow} from './commands.flow';
 
 @Injectable()
 export class FlowService {
 
     constructor(
-        private flowService: ActiveFlowService,
-        private welcomeFlow: WelcomeFlow,
         private tasksFlow: TasksFlow,
+        private welcomeFlow: WelcomeFlow,
+        private commandsFlow: CommandsFlow,
+        private flowService: ActiveFlowService,
     ) {
     }
 
     public respondOnMessage(message: Message) {
+        if (message.type === MessageType.ENTITY && (<any>message.dto).text === '/help') {
+            this.commandsFlow.sendHelpMessage(message);
+            return;
+        }
+        if (message.type === MessageType.ENTITY && (<any>message.dto).text === '/score') {
+            this.commandsFlow.showCurrentScore(message);
+            return;
+        }
+
         // Check active flow
         this.flowService.findActiveFlow(message.getUserId()).subscribe(activeFlow => {
             if (activeFlow) {
@@ -30,19 +41,6 @@ export class FlowService {
                 this.welcomeFlow.init(message);
             }
         });
-        // if (message.type === MessageType.ENTITY && (<any>message.dto).text === '/settings') {
-        //     this.commandsFlow.sendWelcomeMessage(message);
-        // }
-        // if (message.type === MessageType.ENTITY && (<any>message.dto).text === '/help') {
-        //     this.commandsFlow.sendHelpDetails(message);
-        // }
-        // if (message.type === MessageType.ENTITY && (<any>message.dto).text === '/cancel') {
-        //     this.commandsFlow.sendHelpDetails(message);
-        //     this.flowService.deleteFlowByUserId(message.getUserId());
-        // }
-        // if (message.type === MessageType.PHOTO) {
-        //     this.documentsFlow.savePhoto(<PhotoMessage>message);
-        // }
     }
 
     reactOnButtonClick(message: CallbackMessage) {
@@ -54,7 +52,7 @@ export class FlowService {
             }
 
             // Check basic commands
-            if (message.callback.data === 'Взять новую задачу') {
+            if (message.callback.data === 'newTask') {
                 this.tasksFlow.init(message);
             }
         });

@@ -8,7 +8,7 @@ import {AppService} from '../app.service';
 import {PhotoService} from '../entities/photo/photo.service';
 import {Injectable} from '@nestjs/common';
 import {ActiveFlow} from '../entities/activeFlow/activeFlow.entity';
-import {TASK_SCORE, TaskService} from '../entities/tasks/task.service';
+import {TASK_SCORE, TaskService, TaskType} from '../entities/tasks/task.service';
 import {Task} from '../entities/tasks/task.entity';
 
 @Injectable()
@@ -53,13 +53,13 @@ export class TasksFlow extends BaseFlow {
     }
 
     selectTaskStep(message: CallbackMessage) {
-        let taskType = <Buttons>message.getData();
+        let taskType = <TaskType> message.getData();
 
-        if (Messages.SELECT_TASK.buttons.includes(taskType)) {
-            this.tasksService.createTask(message.getUserId(), <any>taskType).subscribe(() => {
+        if (Object.values(TaskType).includes(taskType)) {
+            this.tasksService.createTask(message.getUserId(), taskType).subscribe(() => {
                 this.messageService.sendSeveralMessages(message.getUserId(),
                     [
-                        Messages.SEND_PHOTO1_MSG1(2),
+                        Messages.SEND_PHOTO1_MSG1(TASK_SCORE[taskType]),
                         Messages.SEND_PHOTO1_MSG2,
                     ]);
                 this.nextStep();

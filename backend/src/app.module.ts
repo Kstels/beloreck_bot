@@ -11,6 +11,7 @@ import {ActiveFlowModule} from './entities/activeFlow/activeFlow.module';
 import {TasksFlow} from './flows/tasks.flow';
 import {MessageService} from './services/message.service';
 import {TasksModule} from './entities/tasks/task.module';
+import {CommandsFlow} from './flows/commands.flow';
 
 @Module({
     imports: [
@@ -27,6 +28,7 @@ import {TasksModule} from './entities/tasks/task.module';
         FlowService,
         TasksFlow,
         WelcomeFlow,
+        CommandsFlow,
         MessageService,
         UpdatesMonitorService,
     ],

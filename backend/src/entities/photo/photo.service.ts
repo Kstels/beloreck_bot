@@ -44,7 +44,7 @@ export class PhotoService {
     downloadFile(filePath?: string): Observable<string> {
         let fileName = `${uuid()}.jpg`;
         let url = `https://api.telegram.org/file/bot${TOKEN}/${filePath}`;
-        let path = Path.resolve(__dirname, 'images', fileName);
+        let path = Path.resolve(process.cwd(), 'images', fileName);
         let file = Fs.createWriteStream(path);
 
         let res = new Subject<string>();

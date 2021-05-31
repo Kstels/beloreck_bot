@@ -4,6 +4,7 @@ import {UpdatesMonitorService} from './services/updates-monitor.service';
 
 async function bootstrap() {
     let app = await NestFactory.create(AppModule);
+    app.enableCors();
     await app.listen(3000);
 
     console.log(__dirname);

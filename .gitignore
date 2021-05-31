@@ -1,5 +1,6 @@
 # compiled output backend
 /backend/dist
+/backend/images
 /backend/node_modules
 
 # compiled output frontend
