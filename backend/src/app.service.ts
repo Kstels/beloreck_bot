@@ -43,15 +43,15 @@ export class AppService {
             buttons = message.buttons;
         }
 
-        // this.httpService.post(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
-        //     chat_id: userId,
-        //     text: text,
-        //     reply_markup: {
-        //         inline_keyboard: buttons
-        //             ? buttons.map(x => ([x]))
-        //             : [],
-        //     },
-        // }).subscribe();
+        this.httpService.post(`https://api.telegram.org/bot${TOKEN}/sendMessage`, {
+            chat_id: userId,
+            text: text,
+            reply_markup: {
+                inline_keyboard: buttons
+                    ? buttons.map(x => ([x]))
+                    : [],
+            },
+        }).subscribe();
     }
 
     getFile(fileId: string): Observable<string> {
